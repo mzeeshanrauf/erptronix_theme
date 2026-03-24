@@ -1,19 +1,19 @@
 """
 ErpTronix Theme — hooks.py
-ERPNext v16 Custom Theme Configuration
+ERPNext v16 | Static CSS/JS theme, no esbuild bundling required
 """
 
-from . import __version__ as app_version
+app_name        = "erptronix_theme"
+app_title       = "ErpTronix Theme"
+app_publisher   = "ErpTronix"
+app_description = "Custom light/dark brand theme for ERPNext — electric cyan + navy"
+app_email       = "hello@erptronix.com"
+app_license     = "MIT"
+app_version     = "1.1.0"
 
-app_name = "erptronix_theme"
-app_title = "ErpTronix Theme"
-app_publisher = "ErpTronix"
-app_description = "Custom dark navy + electric cyan brand theme for ERPNext"
-app_email = "hello@erptronix.com"
-app_license = "MIT"
-app_version = "1.0.0"
-
-# ── Inject CSS/JS into every ERPNext page ──────────────────────────────────────
+# ── Static asset includes (served directly, NOT processed by esbuild) ──────────
+# These paths are resolved from /sites/assets/erptronix_theme/
+# after running:  bench setup --no-backups  OR  bench build (which copies statics)
 
 app_include_css = [
     "/assets/erptronix_theme/css/erptronix.css"
@@ -23,8 +23,7 @@ app_include_js = [
     "/assets/erptronix_theme/js/erptronix.js"
 ]
 
-# ── Web includes (portal pages) ───────────────────────────────────────────────
-
+# Portal / web pages
 web_include_css = [
     "/assets/erptronix_theme/css/erptronix.css"
 ]
@@ -33,49 +32,38 @@ web_include_js = [
     "/assets/erptronix_theme/js/erptronix.js"
 ]
 
-# ── Brand Name Override ────────────────────────────────────────────────────────
-
+# ── Brand HTML (replaces Frappe logo in navbar) ────────────────────────────────
 brand_html = """
-<a class="navbar-brand" href="/app">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" fill="none" 
-       style="height:28px;display:block;">
-    <defs>
-      <linearGradient id="etNavGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%"   stop-color="#22d3ee"/>
-        <stop offset="50%"  stop-color="#0ea5e9"/>
-        <stop offset="100%" stop-color="#4f46e5"/>
-      </linearGradient>
-    </defs>
-    <rect x="0" y="3" width="30" height="30" rx="7" fill="url(#etNavGrad)"/>
-    <text x="15" y="23" text-anchor="middle" font-family="Syne,sans-serif"
-          font-weight="900" font-size="13" fill="white" letter-spacing="-0.5">ET</text>
-    <text x="40" y="24" font-family="Syne,sans-serif" font-weight="800"
-          font-size="16" fill="#e2e8f0" letter-spacing="-0.5">Erp</text>
-    <text x="69" y="24" font-family="Syne,sans-serif" font-weight="800"
-          font-size="16" fill="url(#etNavGrad)" letter-spacing="-0.5">Tronix</text>
-  </svg>
+<a class="navbar-brand et-brand" href="/app" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+  <span style="
+    width:30px;height:30px;border-radius:7px;flex-shrink:0;
+    background:linear-gradient(135deg,#22d3ee 0%,#0ea5e9 50%,#4f46e5 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Syne,sans-serif;font-weight:900;font-size:11px;
+    color:#fff;letter-spacing:-0.3px;
+  ">ET</span>
+  <span style="
+    font-family:Syne,sans-serif;font-weight:800;font-size:1.15rem;
+    color:var(--text-color,#0f172a);letter-spacing:-0.025em;white-space:nowrap;
+  ">Erp<span style='
+    background:linear-gradient(135deg,#22d3ee,#4f46e5);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  '>Tronix</span></span>
 </a>
 """
 
-# ── Boot Session Info ──────────────────────────────────────────────────────────
-
+# ── Boot session — injects theme config into Frappe JS globals ─────────────────
 def boot_session(bootinfo):
-    """Inject brand config into the Frappe boot session."""
-    bootinfo.erptronix = {
-        "brand_name": "ErpTronix",
-        "theme_version": "1.0.0",
-        "primary_color": "#22d3ee",
-        "tagline": "Intelligent ERP for Modern Business",
+    bootinfo.erptronix_theme = {
+        "version": "1.1.0",
+        "brand": "ErpTronix",
+        "primary_color": "#0ea5e9",
+        "accent_color": "#22d3ee",
     }
 
-# ── Doc Events (optional) ─────────────────────────────────────────────────────
+# ── After migrate — ensure assets are symlinked ────────────────────────────────
+after_migrate = ["erptronix_theme.setup.after_migrate"]
 
-doc_events = {}
-
-# ── Fixtures ─────────────────────────────────────────────────────────────────
-
-fixtures = []
-
-# ── Scheduler Events ──────────────────────────────────────────────────────────
-
-scheduler_events = {}
+# ── No JS bundles to build — this prevents esbuild from looking for bundles ───
+# Leave build.json absent or empty; bench build will copy /public/* to assets

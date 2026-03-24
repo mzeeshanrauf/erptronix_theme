@@ -1,61 +1,38 @@
-# ErpTronix Theme for ERPNext v16
+# ErpTronix Theme v1.1 — ERPNext v16
 
-A sleek, dark business theme for ERPNext featuring the **ErpTronix** brand identity.
-
-**Design:** Dark navy background with electric cyan/blue gradients, glass-effect cards, and subtle glow effects.
+Custom **light + dark** brand theme for ERPNext. Electric cyan / navy palette with Syne + DM Sans typography.
 
 ---
 
-## 🎨 Theme Preview
+## ⚡ Quick Install (correct method — no esbuild needed)
 
-- **Background:** Deep navy `#080f20`
-- **Accent:** Electric cyan `#22d3ee` → blue `#0ea5e9` → indigo `#4f46e5`
-- **Typography:** Syne (headings) + DM Sans (body)
-- **Cards:** Glass-morphism with backdrop blur
-- **Buttons:** Gradient primary with glow shadow
-- **Tables:** Clean dark with hover highlights
-
----
-
-## 📦 Installation
-
-### 1. Get the app into your bench
+This is a **static CSS/JS theme**. It does NOT need `bench build` to compile anything.  
+Use these steps exactly to avoid the `ERR_INVALID_ARG_TYPE paths[0]` error:
 
 ```bash
-cd /path/to/frappe-bench
+# 1. Copy the app folder into your bench apps directory
+cp -r erptronix_theme /home/erp/frappe-bench/apps/
 
-# Option A — from a local folder
-bench get-app /path/to/erptronix_theme
+# 2. Install the app on your site
+cd /home/erp/frappe-bench
+bench --site YOUR-SITE-NAME install-app erptronix_theme
 
-# Option B — from GitHub (after you push it)
-bench get-app https://github.com/YOUR_ORG/erptronix_theme
-```
+# 3. Symlink static assets (this is what makes CSS/JS available — NO build step)
+bench setup --no-backups
 
-### 2. Install on your ERPNext site
-
-```bash
-bench --site your-site.com install-app erptronix_theme
-```
-
-### 3. Build assets
-
-```bash
-bench build --app erptronix_theme
-```
-
-### 4. Restart bench
-
-```bash
+# 4. Restart
 bench restart
 ```
 
+> ⚠️ **Do NOT run** `bench build --app erptronix_theme` — this app has no JS bundles to build and will error. The `bench setup` step above copies the static files correctly.
+
 ---
 
-## 🔄 Updating
+## 🔄 Updating / Reinstalling
 
 ```bash
-bench update --pull
-bench build --app erptronix_theme
+# Pull latest changes then re-link assets
+bench setup --no-backups
 bench restart
 ```
 
@@ -64,9 +41,42 @@ bench restart
 ## 🗑️ Uninstalling
 
 ```bash
-bench --site your-site.com uninstall-app erptronix_theme
+bench --site YOUR-SITE-NAME uninstall-app erptronix_theme
 bench remove-app erptronix_theme
+bench setup --no-backups
+bench restart
 ```
+
+---
+
+## 🎨 Customizing Colors
+
+Edit `erptronix_theme/public/css/erptronix.css`.
+
+**Light mode** — change values under the `body, [data-theme="light"]` block:
+```css
+body {
+  --bg-color: #f0f4f8;   /* page background */
+  --fg-color: #ffffff;   /* card / panel bg */
+}
+```
+
+**Dark mode** — change values under the `[data-theme="dark"]` block:
+```css
+[data-theme="dark"] {
+  --bg-color: #080f20;
+  --fg-color: #0d1630;
+}
+```
+
+**Brand gradient** (buttons, stat values, logo):
+```css
+:root {
+  --et-grad: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 50%, #4f46e5 100%);
+}
+```
+
+After any CSS change, run `bench setup --no-backups && bench restart`.
 
 ---
 
@@ -76,46 +86,18 @@ bench remove-app erptronix_theme
 erptronix_theme/
 ├── erptronix_theme/
 │   ├── __init__.py
-│   ├── hooks.py                    ← App hooks (CSS/JS injection)
+│   ├── hooks.py          ← asset injection + brand HTML
+│   ├── setup.py          ← after_migrate helper
 │   └── public/
 │       ├── css/
-│       │   └── erptronix.css       ← Main theme stylesheet (~800 lines)
+│       │   └── erptronix.css   ← full theme (light + dark)
 │       └── js/
-│           └── erptronix.js        ← Brand injection & UI enhancements
+│           └── erptronix.js    ← favicon, title patch, ripple, count-up
 ├── setup.py
 ├── pyproject.toml
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-## ✏️ Customization
-
-### Change colors
-Edit the CSS variables at the top of `erptronix.css`:
-
-```css
-:root {
-  --et-accent:    #22d3ee;   /* Main cyan accent */
-  --et-accent2:   #0ea5e9;   /* Secondary blue */
-  --et-bg:        #080f20;   /* Page background */
-  --et-surface:   #0d1630;   /* Card/panel bg */
-}
-```
-
-### Change brand name
-Edit `BRAND.name` in `erptronix.js`:
-
-```js
-const BRAND = {
-  name: 'ErpTronix',
-  tagline: 'Intelligent ERP for Modern Business',
-};
-```
-
-### Change logo
-Replace the `LOGO_SVG` string in `erptronix.js` with your own SVG markup.
 
 ---
 
@@ -127,6 +109,8 @@ Replace the `LOGO_SVG` string in `erptronix.js` with your own SVG markup.
 
 ---
 
-## 📄 License
+## ❓ Why not `bench build`?
 
-MIT — Free to use and modify for your business.
+ERPNext's `bench build` uses **esbuild** to bundle JS files declared in `build.json`.  
+This theme has no `build.json` because it ships pure pre-written CSS/JS — no transpilation or bundling is needed.  
+`bench setup --no-backups` creates the symlink from `/apps/erptronix_theme/public/` → `/sites/assets/erptronix_theme/`, which is all that's required.
