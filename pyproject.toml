@@ -1,0 +1,11 @@
+[project]
+name = "erptronix_theme"
+version = "1.0.0"
+description = "ErpTronix — Custom dark navy + electric cyan brand theme for ERPNext v16"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "ErpTronix", email = "hello@erptronix.com"}]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
