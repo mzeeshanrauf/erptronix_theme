@@ -1,116 +1,51 @@
-# ErpTronix Theme v1.1 — ERPNext v16
+# ErpTronix Theme — ERPNext v16
 
-Custom **light + dark** brand theme for ERPNext. Electric cyan / navy palette with Syne + DM Sans typography.
+Professional blue theme for ERPNext v16, based on Data Value Theme structure.
 
 ---
 
-## ⚡ Quick Install (correct method — no esbuild needed)
-
-This is a **static CSS/JS theme**. It does NOT need `bench build` to compile anything.  
-Use these steps exactly to avoid the `ERR_INVALID_ARG_TYPE paths[0]` error:
+## Install
 
 ```bash
-# 1. Copy the app folder into your bench apps directory
-cp -r erptronix_theme /home/erp/frappe-bench/apps/
+# 1. Upload ZIP to server, extract
+unzip erptronix_theme_v3.0.zip -d /home/erp/
 
-# 2. Install the app on your site
+# 2. Copy app into bench
+cp -r /home/erp/erptronix_theme /home/erp/frappe-bench/apps/
+
+# 3. Install on site
 cd /home/erp/frappe-bench
-bench --site YOUR-SITE-NAME install-app erptronix_theme
+bench --site YOUR-SITE install-app erptronix_theme
 
-# 3. Symlink static assets (this is what makes CSS/JS available — NO build step)
-bench setup --no-backups
+# 4. Symlink static assets (NO bench build needed)
+ln -sf /home/erp/frappe-bench/apps/erptronix_theme/erptronix_theme/public \
+        /home/erp/frappe-bench/sites/assets/erptronix_theme
 
-# 4. Restart
+# 5. Restart
 bench restart
 ```
 
-> ⚠️ **Do NOT run** `bench build --app erptronix_theme` — this app has no JS bundles to build and will error. The `bench setup` step above copies the static files correctly.
-
----
-
-## 🔄 Updating / Reinstalling
+## Update CSS only (no reinstall needed)
 
 ```bash
-# Pull latest changes then re-link assets
-bench setup --no-backups
+cp erptronix_theme/erptronix_theme/public/css/erptronix.css \
+   /home/erp/frappe-bench/apps/erptronix_theme/erptronix_theme/public/css/erptronix.css
 bench restart
 ```
 
----
-
-## 🗑️ Uninstalling
-
-```bash
-bench --site YOUR-SITE-NAME uninstall-app erptronix_theme
-bench remove-app erptronix_theme
-bench setup --no-backups
-bench restart
-```
+Then hard-refresh browser: `Ctrl+Shift+R`
 
 ---
 
-## 🎨 Customizing Colors
+## Color Customization
 
-Edit `erptronix_theme/public/css/erptronix.css`.
+Edit `:root` variables at the top of `public/css/erptronix.css`:
 
-**Light mode** — change values under the `body, [data-theme="light"]` block:
-```css
-body {
-  --bg-color: #f0f4f8;   /* page background */
-  --fg-color: #ffffff;   /* card / panel bg */
-}
-```
-
-**Dark mode** — change values under the `[data-theme="dark"]` block:
-```css
-[data-theme="dark"] {
-  --bg-color: #080f20;
-  --fg-color: #0d1630;
-}
-```
-
-**Brand gradient** (buttons, stat values, logo):
 ```css
 :root {
-  --et-grad: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 50%, #4f46e5 100%);
+    --et-primary:       #1a73e8;   /* Main blue */
+    --et-primary-hover: #1557b0;   /* Darker blue for hover */
+    --et-primary-light: #e8f0fe;   /* Light blue tint */
+    --et-bg:            #f8fafb;   /* Page background */
 }
 ```
-
-After any CSS change, run `bench setup --no-backups && bench restart`.
-
----
-
-## 📁 File Structure
-
-```
-erptronix_theme/
-├── erptronix_theme/
-│   ├── __init__.py
-│   ├── hooks.py          ← asset injection + brand HTML
-│   ├── setup.py          ← after_migrate helper
-│   └── public/
-│       ├── css/
-│       │   └── erptronix.css   ← full theme (light + dark)
-│       └── js/
-│           └── erptronix.js    ← favicon, title patch, ripple, count-up
-├── setup.py
-├── pyproject.toml
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 🛠️ Compatibility
-
-| ERPNext | Frappe | Python |
-|---------|--------|--------|
-| v16.x   | v16.x  | 3.10+  |
-
----
-
-## ❓ Why not `bench build`?
-
-ERPNext's `bench build` uses **esbuild** to bundle JS files declared in `build.json`.  
-This theme has no `build.json` because it ships pure pre-written CSS/JS — no transpilation or bundling is needed.  
-`bench setup --no-backups` creates the symlink from `/apps/erptronix_theme/public/` → `/sites/assets/erptronix_theme/`, which is all that's required.

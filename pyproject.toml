@@ -1,7 +1,7 @@
 [project]
 name = "erptronix_theme"
-version = "1.1.0"
-description = "ErpTronix — custom light/dark theme for ERPNext v16"
+version = "1.0.0"
+description = "ErpTronix Theme for ERPNext v16"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name = "ErpTronix", email = "hello@erptronix.com"}]

@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="erptronix_theme",
-    version="1.1.0",
-    description="ErpTronix — custom light/dark theme for ERPNext v16",
+    version="1.0.0",
+    description="ErpTronix Theme for ERPNext v16",
     author="ErpTronix",
     author_email="hello@erptronix.com",
     packages=find_packages(),
