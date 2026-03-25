@@ -20,7 +20,10 @@ app_include_css = [
     "/assets/erptronix_theme/css/datavalue_theme.bundle.css",
 ]
 
-# ORDER MATTERS: injector JS runs first to create mount points, then Vue app mounts on them
+# IMPORTANT ORDER:
+# 1. plugins first (vue, jquery plugins)
+# 2. app.min.js (Vue app - registers listeners for 'app-loaded')
+# 3. erptronix_theme.js LAST (injects DOM elements then triggers 'app-loaded')
 app_include_js = [
     "/assets/erptronix_theme/plugins/vue/vue.js",
     "/assets/erptronix_theme/plugins/bootstrap4c-chosen/chosen.min.js",
@@ -28,8 +31,8 @@ app_include_js = [
     "/assets/erptronix_theme/plugins/tooltip/tooltip.js",
     "/assets/erptronix_theme/plugins/jquery-fullscreen/jquery.fullscreen.min.js",
     "/assets/erptronix_theme/plugins/simple-calendar/jquery.simple-calendar.js",
-    "/assets/erptronix_theme/js/erptronix_theme.js",
     "/assets/erptronix_theme/js/erptronix_theme.app.min.js",
+    "/assets/erptronix_theme/js/erptronix_theme.js",
 ]
 
 web_include_css = [
