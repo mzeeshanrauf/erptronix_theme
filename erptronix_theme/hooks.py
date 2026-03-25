@@ -7,13 +7,10 @@ app_description = "Professional ErpTronix Theme for ERPNext v16"
 app_email       = "hello@erptronix.com"
 app_license     = "MIT"
 
-# ── Favicon / splash ───────────────────────────────────────────────────────
 website_context = {
-    "favicon":      "/assets/erptronix_theme/images/datavlue-new-icon-xs.png",
-    "splash_image": "/assets/erptronix_theme/images/theme_splash_empty.jpg",
+    "favicon": "/assets/erptronix_theme/images/datavlue-new-icon-xs.png",
 }
 
-# ── App CSS & JS (desk / ERPNext app) ─────────────────────────────────────
 app_include_css = [
     "/assets/erptronix_theme/plugins/animate.css/animate.min.css",
     "/assets/erptronix_theme/plugins/fontawesome/all.min.css",
@@ -23,6 +20,7 @@ app_include_css = [
     "/assets/erptronix_theme/css/datavalue_theme.bundle.css",
 ]
 
+# ORDER MATTERS: injector JS runs first to create mount points, then Vue app mounts on them
 app_include_js = [
     "/assets/erptronix_theme/plugins/vue/vue.js",
     "/assets/erptronix_theme/plugins/bootstrap4c-chosen/chosen.min.js",
@@ -30,10 +28,10 @@ app_include_js = [
     "/assets/erptronix_theme/plugins/tooltip/tooltip.js",
     "/assets/erptronix_theme/plugins/jquery-fullscreen/jquery.fullscreen.min.js",
     "/assets/erptronix_theme/plugins/simple-calendar/jquery.simple-calendar.js",
+    "/assets/erptronix_theme/js/erptronix_theme.js",
     "/assets/erptronix_theme/js/erptronix_theme.app.min.js",
 ]
 
-# ── Web / portal (login page etc.) ────────────────────────────────────────
 web_include_css = [
     "assets/erptronix_theme/plugins/fontawesome/all.min.css",
     "assets/erptronix_theme/css/login.css",
@@ -44,19 +42,8 @@ web_include_js = [
     "/assets/erptronix_theme/js/erptronix_theme.web.min.js",
 ]
 
-# ── Email brand image ──────────────────────────────────────────────────────
 email_brand_image = "assets/erptronix_theme/images/logo-v.png"
 
-# ── Page JS injections ────────────────────────────────────────────────────
 page_js = {
     "dashboard-view": "public/js/customizations/pages/dashboard_view.js",
 }
-
-# ── Override Frappe's desk page with custom ErpTronix layout ──────────────
-# This is what renders the full custom navbar + side menu
-# The www/app.html + www/app.py override /app route
-override_whitelisted_methods = {}
-
-# ── Doctypes ──────────────────────────────────────────────────────────────
-# (Theme Settings, Dashboard Map, Form Number Card, etc. from original)
-fixtures = []

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <defs>
+    <linearGradient id="etg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14a6ef"/>
+      <stop offset="100%" stop-color="#0e7bc2"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon box -->
+  <rect x="0" y="5" width="40" height="40" rx="9" fill="url(#etg)"/>
+  <text x="20" y="31" text-anchor="middle" font-family="Arial,sans-serif"
+        font-weight="900" font-size="17" fill="white">ET</text>
+  <!-- Brand name -->
+  <text x="52" y="34" font-family="Arial,sans-serif" font-weight="700"
+        font-size="22" fill="#1a2332">Erp</text>
+  <text x="85" y="34" font-family="Arial,sans-serif" font-weight="700"
+        font-size="22" fill="url(#etg)">Tronix</text>
+</svg>
