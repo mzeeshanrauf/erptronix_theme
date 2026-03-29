@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Abdo Hamoud and Contributors
+# Copyright (c) 2021, ErpTronix and Contributors
 # See license.txt
 
 # import frappe

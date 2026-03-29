@@ -1,51 +1,28 @@
-# ErpTronix Theme — ERPNext v16
+# ERPTronix Theme
 
-Professional blue theme for ERPNext v16, based on Data Value Theme structure.
+A custom Frappe/ERPNext v15 theme by **ERPTronix**.
 
----
-
-## Install
+## Installation
 
 ```bash
-# 1. Upload ZIP to server, extract
-unzip erptronix_theme_v3.0.zip -d /home/erp/
-
-# 2. Copy app into bench
-cp -r /home/erp/erptronix_theme /home/erp/frappe-bench/apps/
-
-# 3. Install on site
-cd /home/erp/frappe-bench
-bench --site YOUR-SITE install-app erptronix_theme
-
-# 4. Symlink static assets (NO bench build needed)
-ln -sf /home/erp/frappe-bench/apps/erptronix_theme/erptronix_theme/public \
-        /home/erp/frappe-bench/sites/assets/erptronix_theme
-
-# 5. Restart
+bench get-app https://github.com/mzeeshanrauf/erptronix_theme
+bench --site your-site install-app erptronix_theme
+bench build
 bench restart
 ```
 
-## Update CSS only (no reinstall needed)
+## Features
 
-```bash
-cp erptronix_theme/erptronix_theme/public/css/erptronix.css \
-   /home/erp/frappe-bench/apps/erptronix_theme/erptronix_theme/public/css/erptronix.css
-bench restart
-```
+- Custom login page with ERPTronix branding
+- Multiple color themes (blue, green, orange, pink, red, violet, yellow)
+- RTL support
+- Dark mode support
+- Custom dashboard with KPI cards
+- Custom workspace and number cards
 
-Then hard-refresh browser: `Ctrl+Shift+R`
+## License
+
+MIT
 
 ---
-
-## Color Customization
-
-Edit `:root` variables at the top of `public/css/erptronix.css`:
-
-```css
-:root {
-    --et-primary:       #1a73e8;   /* Main blue */
-    --et-primary-hover: #1557b0;   /* Darker blue for hover */
-    --et-primary-light: #e8f0fe;   /* Light blue tint */
-    --et-bg:            #f8fafb;   /* Page background */
-}
-```
+**Developed by [ERPTronix](https://erptronix.com)**

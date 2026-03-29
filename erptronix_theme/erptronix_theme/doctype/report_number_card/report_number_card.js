@@ -1,4 +1,4 @@
-// Copyright (c) 2025, Abdo Hamoud and contributors
+// Copyright (c) 2025, ErpTronix and contributors
 // For license information, please see license.txt
 
 // frappe.ui.form.on("Report Number Card", {

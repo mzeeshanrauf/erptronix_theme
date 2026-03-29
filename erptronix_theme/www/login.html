@@ -1,7 +1,7 @@
 <!--
-ErpTronix Theme
-By: Abdo Hamoud
-www.abdo-host.com
+ERPTronix Theme
+By: ErpTronix
+www.erptronix.com
 -->
 {% extends "templates/web.html" %}
 
@@ -58,9 +58,12 @@ www.abdo-host.com
 
 {% macro logo_section() %}
 <div class="page-card-head">
-    <div class="text-left">
+    <div class="text-left erptronix-login-brand">
+        <div class="erptronix-brand-logo">
+            <img src="/assets/erptronix_theme/images/erptronix-logo.svg" alt="ERPTronix" class="erptronix-svg-logo">
+        </div>
         <h2>{{ _('Welcome Back')}}</h2>
-        <p class="text-secondary font-size-md">{{ _('Login your account and start your business') }}</p>
+        <p class="text-secondary font-size-md">{{ _('Login to your ERPTronix account') }}</p>
     </div>
 </div>
 {% endmacro %}
@@ -77,12 +80,14 @@ www.abdo-host.com
 	<section class='for-login'>
 		<div class="login-content page-card">
 			<div class="login-content-bg">
-				<img class="app-logo" src="{{ logo }}">
+				<div class="erptronix-login-panel-brand">
+					<img src="/assets/erptronix_theme/images/erptronix-logo-light.svg" alt="ERPTronix" class="erptronix-panel-logo">
+				</div>
 				<div data-action="">
 					<div data-action="">
 						<img class="app-login-bg" src="/assets/erptronix_theme/images/erpnext-hero-compressed.png">
 					</div>
-					<div class="text-center login-copyrights">Powered By <a href="https://kenztechnology.com/" target="_blank">ErpTronix</a></div>
+					<div class="text-center login-copyrights">Powered By <a href="https://erptronix.com/" target="_blank">ERPTronix</a></div>
 				</div>
 			</div>
 			<div class="login-content-form">

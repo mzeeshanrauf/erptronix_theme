@@ -1,17 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50">
   <defs>
-    <linearGradient id="etg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#14a6ef"/>
-      <stop offset="100%" stop-color="#0e7bc2"/>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <!-- Icon box -->
-  <rect x="0" y="5" width="40" height="40" rx="9" fill="url(#etg)"/>
-  <text x="20" y="31" text-anchor="middle" font-family="Arial,sans-serif"
-        font-weight="900" font-size="17" fill="white">ET</text>
+  <!-- Icon: circuit/ERP hex mark -->
+  <rect x="4" y="8" width="34" height="34" rx="8" fill="url(#grad1)"/>
+  <text x="21" y="31" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">E</text>
   <!-- Brand name -->
-  <text x="52" y="34" font-family="Arial,sans-serif" font-weight="700"
-        font-size="22" fill="#1a2332">Erp</text>
-  <text x="85" y="34" font-family="Arial,sans-serif" font-weight="700"
-        font-size="22" fill="url(#etg)">Tronix</text>
+  <text x="48" y="21" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#1e293b" letter-spacing="0.5">ERP</text>
+  <text x="48" y="38" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="url(#grad1)" letter-spacing="0.5">Tronix</text>
 </svg>

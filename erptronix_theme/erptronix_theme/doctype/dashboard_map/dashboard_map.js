@@ -1,10 +1,10 @@
-// Copyright (c) 2024, Abdo Hamoud and contributors
+// Copyright (c) 2024, ErpTronix and contributors
 /*
-* Kenz Technology Team
-* Author: Abdo Hamoud
-* Email: abdo.host@gmail.com
-* Website: https://www.abdo-host.com
-* Website: https://kenztechnology.com
+* ERPTronix Team
+* Author: ErpTronix
+* Email: info@erptronix.com
+* Website: https://www.erptronix.com
+* Website: https://erptronix.com
 */
 
 frappe.ui.form.on("Dashboard Map", {
